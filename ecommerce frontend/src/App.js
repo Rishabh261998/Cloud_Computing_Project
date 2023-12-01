@@ -7,6 +7,7 @@ import ShoppingCart from './components/ShoppingCart';
 import LandingPage from './components/LandingPage'
 import LoginPage from './components/LoginPage'
 import RegisterPage from './components/RegisterPage'
+import Order from './components/Order';
 
 import './App.css'
 
@@ -39,7 +40,6 @@ function App() {
   }, [cartItems]);
 
   const shouldLogoutButton = localStorage.getItem('currentUser') != null;
-  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   // console.log(currentUser);
 
   return (
@@ -51,7 +51,8 @@ function App() {
               <Route path="/register" element={ <RegisterPage/> } />
               <Route path="/home" element={<ProductList addToCart={addToCart}/>}/>
               <Route path="/products/:primaryKey" element={<ProductDetails addToCart={addToCart}/>}/>
-              <Route path="/cart" element={<ShoppingCart cartItems={cartItems} removeFromCart={removeFromCart}/>}/>
+              <Route path="/cart" element={<ShoppingCart cartItems={cartItems} removeFromCart={removeFromCart} addToCart={addToCart} setCartItems={setCartItems}/>}/>
+              <Route path="/order" element={<Order />} />
             </Routes>
       </div>
   );
