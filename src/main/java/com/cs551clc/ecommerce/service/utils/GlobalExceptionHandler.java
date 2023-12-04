@@ -1,5 +1,7 @@
 package com.cs551clc.ecommerce.service.utils;
 
+import com.cs551clc.ecommerce.service.utils.exception.ProductUnavailableError;
+import com.cs551clc.ecommerce.service.utils.exception.ProductUnavailableException;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
-
+    @ExceptionHandler(value= ProductUnavailableException.class)
+    protected ResponseEntity<Object> handleProductUnavailableRequest(Exception e, WebRequest request) {
+        if(e.getClass()== ProductUnavailableException.class){
+            return handleExceptionInternal(e, new ProductUnavailableError((ProductUnavailableException) e), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+        }
+        return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
 
 }
