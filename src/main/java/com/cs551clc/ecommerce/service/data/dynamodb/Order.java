@@ -1,9 +1,12 @@
 package com.cs551clc.ecommerce.service.data.dynamodb;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.joda.time.DateTime;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -25,4 +28,7 @@ public class Order {
 
     @DynamoDBAttribute
     List<BigInteger> productQtyList;
+
+
+    String dateTime;
 }

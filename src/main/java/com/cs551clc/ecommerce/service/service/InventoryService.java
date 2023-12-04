@@ -15,16 +15,12 @@ public class InventoryService {
     private InventoryRepository repository;
 
 
-    public InventoryItem getItemById(String productKey) throws Exception {
-        try {
+    public InventoryItem getItemById(String productKey) {
+
             return repository.getItemByProductKey(productKey).get(0);
-        }
-        catch (Exception e) {
-            throw new BadRequestException("Unable to fetch inventory item with key: "+productKey+" Reason: "+e.getMessage());
-        }
     }
 
-    public void transactItem(String productKey, BigInteger qty) throws Exception {
+    public void transactItem(String productKey, BigInteger qty) {
         InventoryItem item = getItemById(productKey);
         BigInteger qty_available = item.getQty_available();
         item.setQty_available(qty_available.subtract(qty));

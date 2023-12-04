@@ -32,12 +32,20 @@ public class OrderService {
     @Autowired
     private InventoryService inventoryService;
 
-    public List<Order> getOrdersByUserId(String userName) {
+    public List<Order> getOrdersByUserId(String userName){
         if(userRepository.getUserById(userName).isEmpty())
             throw new IllegalArgumentException("Username does not exist!");
         List<Order> orders = orderRepository.getOrderByUserId(userName);
         if(orders.isEmpty())
             throw new NoSuchElementException("Order List is Empty!");
+        for(Order order:orders)
+        {
+
+                List<String> productNames = order.getProductIdList().stream()
+                        .map(productId -> inventoryService.getItemById(productId).getSortKey())
+                        .toList();
+            order.setProductIdList(productNames);
+        }
         return orders;
     }
 
@@ -79,7 +87,7 @@ public class OrderService {
     }
 
     //Function for decreasing each product by given qty in the order//
-    private void updateItems(List<String> productIds, List<BigInteger> quantities) throws Exception {
+    private void updateItems(List<String> productIds, List<BigInteger> quantities) {
         for(int i=0;i< productIds.size();i++)
         {
             String productId= productIds.get(i);
