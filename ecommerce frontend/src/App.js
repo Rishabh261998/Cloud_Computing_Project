@@ -8,6 +8,7 @@ import LandingPage from './components/LandingPage'
 import LoginPage from './components/LoginPage'
 import RegisterPage from './components/RegisterPage'
 import Order from './components/Order';
+import OrdersPage from './components/OrdersPage';
 
 import './App.css'
 
@@ -53,6 +54,7 @@ function App() {
               <Route path="/products/:primaryKey" element={<ProductDetails addToCart={addToCart}/>}/>
               <Route path="/cart" element={<ShoppingCart cartItems={cartItems} removeFromCart={removeFromCart} addToCart={addToCart} setCartItems={setCartItems}/>}/>
               <Route path="/order" element={<Order />} />
+              <Route path="/orders" element={<OrdersPage />} />
             </Routes>
       </div>
   );

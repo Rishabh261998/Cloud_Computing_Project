@@ -28,6 +28,7 @@ public class DynamoDBConfig {
             assumeRoleResponse = stsClient.assumeRole(AssumeRoleRequest.builder()
                     .roleArn(roleArn)
                     .roleSessionName("AssumedRoleSession")
+                    .durationSeconds(900)
                     .build());
         }
 

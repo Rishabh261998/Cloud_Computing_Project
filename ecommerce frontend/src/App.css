@@ -162,7 +162,7 @@ form span {
 
 /* ProductList.css */
 .product-list-container {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f9f9f9;
@@ -377,12 +377,12 @@ form span {
 
 /* LandingPage.css */
 .landing-page-header {
-  /* background-image: url('your-background-image.jpg'); */
+  background-image: url("https://img551.s3.amazonaws.com/img.jpg");
   background-size: cover;
   background-position: center;
   color: #fff;
   text-align: center;
-  padding: 80px 20px;
+  padding: 215px 20px;
 }
 
 .landing-page-content {
@@ -392,6 +392,7 @@ form span {
 
 .text-center {
   text-align: center;
+  color: black;
 }
 
 .primary-button {
@@ -444,3 +445,64 @@ form span {
   background-color: #45a049;
 }
 
+.orders-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.orders-ul {
+  list-style: none;
+  padding: 0;
+}
+
+.order-li {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.order-info {
+  font-size: 16px;
+}
+
+.order-info p {
+  margin: 0;
+}
+
+.order-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.order-info li {
+  margin: 8px 0;
+}
+
+.go-to-orders-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.go-to-orders-button:hover {
+  background-color: #0056b3;
+}
+
+.product-image img {
+  width: 150px; /* Set a fixed width for the image */
+  height: 150px; /* Set a fixed height for the image */
+  margin-right: 50px;
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
+  border-radius: 8px; /* Add border-radius for rounded corners */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
+}
+
+.product-total {
+  display: flex;
+}

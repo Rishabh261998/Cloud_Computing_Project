@@ -1,6 +1,7 @@
 // ProductList.js
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_URL } from './Constants'
 
 import '../App.css'; // Import your CSS file for styling
 
@@ -8,11 +9,16 @@ function ProductItem({ product, addToCart }) {
   return (
     <li key={product.primaryKey} className="product-li">
       <Link to={`/products/${product.primaryKey}`} className="product-link">
-        <div className="product-info">
-          <div className="product-name">{product.sortKey}</div>
-          <div className="product-price-quantity">
-            <div className="product-price">${product.price.toFixed(2)}</div>
-            <div className="product-quantity">Qty: {product.qty_available}</div>
+        <div className="product-total">
+          <div className="product-image">
+            <img src={product.img_link}/>
+          </div>
+          <div className="product-info">
+            <div className="product-name">{product.sortKey}</div>
+            <div className="product-price-quantity">
+              <div className="product-price">${product.price.toFixed(2)}</div>
+              <div className="product-quantity">Qty: {product.qty_available}</div>
+            </div>
           </div>
         </div>
       </Link>
@@ -48,7 +54,7 @@ function ProductList({ addToCart }) {
         alert('You are not Logged In!');
       }, 0);
     } else {
-      const data = fetch('http://localhost:8080/inventory')
+      const data = fetch(API_URL.concat('/inventory'))
         .then((res) => res.json())
         .then((data) => {
           setallProducts(data);
@@ -93,6 +99,9 @@ function ProductList({ addToCart }) {
       </ul>
       <Link to="/cart">
         <button className="go-to-cart-button">Go to Cart</button>
+      </Link>
+      <Link to="/orders">
+        <button className="go-to-orders-button">Previous Orders</button>
       </Link>
     </div>
   );

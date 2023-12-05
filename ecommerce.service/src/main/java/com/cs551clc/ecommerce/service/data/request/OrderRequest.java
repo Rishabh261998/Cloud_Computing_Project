@@ -4,13 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigInteger;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterUserRequest {
+public class OrderRequest {
 
-    private String username;
-    private String full_name;
-    private String email;
-    private String password;
+    String username;
+    List<String> productIdList;
+    List<BigInteger> productQtyList;
 }

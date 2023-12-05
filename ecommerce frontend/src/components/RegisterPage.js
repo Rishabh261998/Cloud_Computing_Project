@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { API_URL } from './Constants'
 import axios from "axios"
 
 import '../App.css'
@@ -11,11 +12,22 @@ export default function SignUpPage() {
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
 
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (localStorage.getItem('currentUser') != null) {
+            navigate('/home');
+            setTimeout(() => {
+            alert('You are already Logged In!');
+            }, 0);
+        }
+    }, [navigate]);
+
 
     async function save(event) {
         event.preventDefault();
         try {
-          await axios.put("http://localhost:8080/register", {
+          await axios.put(API_URL.concat('/register'), {
           full_name: name,
           email: email,
           password: password,

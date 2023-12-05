@@ -1,6 +1,7 @@
 // ProductDetails.js
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { API_URL } from './Constants'
 
 import '../App.css'; // Import your CSS file for styling
 
@@ -16,7 +17,7 @@ function ProductDetails({ addToCart }) {
       }, 0);
     }
 
-    const data = fetch('http://localhost:8080/inventory')
+    const data = fetch(API_URL.concat('/inventory'))
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);

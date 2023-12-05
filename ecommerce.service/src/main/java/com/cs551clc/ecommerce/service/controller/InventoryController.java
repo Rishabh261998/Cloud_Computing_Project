@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://23.20.222.173:3000", methods={RequestMethod.GET})
+@CrossOrigin
 @RestController
 public class InventoryController {
 

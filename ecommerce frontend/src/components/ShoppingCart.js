@@ -1,6 +1,8 @@
 // ShoppingCart.js
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_URL } from './Constants'
+import axios from "axios"
 
 import '../App.css';
 
@@ -45,8 +47,40 @@ function ShoppingCart({ cartItems, removeFromCart, addToCart, setCartItems }) {
     } else {
       // Implement your order placement logic here
 
-      // Remove items from the cart after placing the order
-      clearCart();
+      const orderData = {
+        username: JSON.parse(localStorage.getItem('currentUser')).username, // Assuming you store the username in localStorage
+        productIdList: [],
+        productQtyList: [],
+      };
+  
+      // Calculate quantity for each product
+      const productQuantities = {};
+      cartItems.forEach((item) => {
+        const productId = item.primaryKey;
+        productQuantities[productId] = (productQuantities[productId] || 0) + 1;
+      });
+  
+      // Populate productIdList and productQtyList
+      Object.entries(productQuantities).forEach(([productId, quantity]) => {
+        orderData.productIdList.push(productId);
+        orderData.productQtyList.push(quantity);
+      });
+      console.log(orderData);
+      try {
+        axios.put(API_URL.concat('/order'), orderData)
+        .then((res) => {
+          navigate('/order')
+          // Remove items from the cart after placing the order
+          clearCart();
+        })
+        .catch((error) => {
+          alert('Order placement failed:' + error.response.data.message);
+          navigate('/home');
+        });
+      } catch (error) {
+        console.log(error);
+        navigate('/home');
+      }
     }
   };
 

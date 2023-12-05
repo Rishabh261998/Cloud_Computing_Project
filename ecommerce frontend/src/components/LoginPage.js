@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link, useNavigate} from 'react-router-dom'
 import axios from "axios"
+import { API_URL } from './Constants'
 // import { useSignIn } from 'react-auth-kit'
 
 import '../App.css'
@@ -12,13 +13,21 @@ export default function SignInPage() {
     const navigate = useNavigate();
     // const signin = useSignIn();
 
+    useEffect(() => {
+        if (localStorage.getItem('currentUser') != null) {
+            navigate('/home');
+            setTimeout(() => {
+            alert('You are already Logged In!');
+            }, 0);
+        }
+    }, [navigate]);
+
 
     async function login(event) {
         event.preventDefault();
 
-        
         try {
-          await axios.post("http://localhost:8080/login", {
+          await axios.post(API_URL.concat('/login'), {
             username: username,
             password: password,
             }).then((res) => 

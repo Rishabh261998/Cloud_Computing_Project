@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://23.20.222.173:3000", methods={RequestMethod.POST, RequestMethod.PUT})
+@CrossOrigin
 @RestController
 public class LoginController {
 
